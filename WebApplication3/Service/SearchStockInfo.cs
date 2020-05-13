@@ -25,37 +25,15 @@ namespace WebApplication3.Service
                                                           ,[收盤價]
                                                       FROM[StockDb].[dbo].[日收盤] Where 股票代號 = @Input ";
         //用DI                                       
-        private int CallCount;
+        
         private int SqlCount;
-        //用DI
-        private readonly IMemoryCache MemoryCache;
+        
         public SearchStockInfo()
         {
-            CallCount = 0;
+           
 
         }
-        public async Task<IActionResult> SearchByStockId(int stockId)
-        {
-            Console.WriteLine("呼叫服務");
-            CallCount = Interlocked.Increment(ref CallCount);
-            Console.WriteLine($"服務被呼叫次數: { CallCount}  時間: {DateTime.Now}");
-            Lazy<Task<StockInfo[]>> stockInfoTaskLazy = new Lazy<Task<StockInfo[]>>(() => SearchDatabase(stockId, queryStockId));
-            var old = MemoryCache.TryGetValue(stockId, out stockInfoTaskLazy);
-            if (!old)
-            {
-                Console.WriteLine("建立快取");
-                return Task.FromResult("SearchResult", new { result = stockInfoTaskLazy.Value });
-            }
-            else
-            {
-                Console.WriteLine("拿快取");
-                return CreatedAtAction("SearchResult", new { result = (stockInfoTaskLazy as Lazy<Task<StockInfo[]>>).Value });
-            }
-        }
-
-    
-
-        private async Task<StockInfo[]> SearchDatabase(int stockId, string queryStockId)
+        public async Task<StockInfo[]> SearchDbByStockId(string stockId)
         {
             SqlCount = Interlocked.Increment(ref SqlCount);
             Console.WriteLine("查sql次數: " + SqlCount);
@@ -95,5 +73,9 @@ namespace WebApplication3.Service
                 }
             }
         }
+
+    
+
+    
     }
 }

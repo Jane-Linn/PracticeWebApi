@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication3</name>
+    </assembly>
+    <members>
+        <member name="M:WebApplication3.Controller.StockInfoController.GetStockInfo(System.String)">
+            <summary>
+            依照指定的股票代碼取得資料
+            </summary>
+            <param name="stockId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApplication3.Program">
+            <summary>
+            進入點
+            </summary>
+        </member>
+        <member name="M:WebApplication3.Program.Main(System.String[])">
+            <summary>
+            程式起始點
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:WebApplication3.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            Host Builder設定
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
